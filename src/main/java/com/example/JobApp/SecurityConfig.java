@@ -21,7 +21,8 @@ public class SecurityConfig {
 
         http.csrf(csrf-> csrf.disable())
                 .authorizeHttpRequests(auth->
-                        auth.requestMatchers("/users/**","/users").permitAll()
+                        // We added the Swagger URLs right here so Chrome can see them!
+                        auth.requestMatchers("/users/**", "/users", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                                 .requestMatchers("/employers/**").hasAuthority("EMPLOYER")
                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                 .requestMatchers("/customer/**", "/customers").hasAuthority("CUSTOMER")
